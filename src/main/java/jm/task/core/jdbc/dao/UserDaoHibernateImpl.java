@@ -18,9 +18,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
-        Configuration cfg = Util.getConfiguration();
-
-        Session session = Util.getSession(cfg);
+        Session session = Util.getSession();
 
         Transaction tx = session.beginTransaction();
         Query query = session.createSQLQuery("create table User (id INT auto_increment, name VARCHAR(45), lastName VARCHAR(45), age INT, constraint user_pk primary key (id));");
@@ -33,9 +31,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-        Configuration cfg = Util.getConfiguration();
-        cfg.addAnnotatedClass(User.class);
-        Session session = Util.getSession(cfg);
+        //Configuration cfg = Util.getConfiguration();
+        //cfg.addAnnotatedClass(User.class);
+        Session session = Util.getSession();
 
         Transaction tx = session.beginTransaction();
         Query query = session.createSQLQuery("drop table User ");
@@ -50,9 +48,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        Configuration cfg = Util.getConfiguration();
-        cfg.addAnnotatedClass(User.class);
-        Session session = Util.getSession(cfg);
+        //Configuration cfg = Util.getConfiguration();
+        //cfg.addAnnotatedClass(User.class);
+        Session session = Util.getSession();
 
         Transaction tx = session.beginTransaction();
 
@@ -70,9 +68,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void removeUserById(long id) {
-        Configuration cfg = Util.getConfiguration();
-        cfg.addAnnotatedClass(User.class);
-        Session session = Util.getSession(cfg);
+        //Configuration cfg = Util.getConfiguration();
+        //cfg.addAnnotatedClass(User.class);
+        Session session = Util.getSession();
         Transaction tx = session.beginTransaction();
         try {
             session.delete(session.get(User.class,id));
@@ -83,9 +81,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        Configuration cfg = Util.getConfiguration();
-        cfg.addAnnotatedClass(User.class);
-        Session session = Util.getSession(cfg);
+        //Configuration cfg = Util.getConfiguration();
+        //cfg.addAnnotatedClass(User.class);
+        Session session = Util.getSession();
 
         Query query  = session.createQuery("from User");
         List list = query.list();
@@ -97,9 +95,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void cleanUsersTable() {
-        Configuration cfg = Util.getConfiguration();
-        cfg.addAnnotatedClass(User.class);
-        Session session = Util.getSession(cfg);
+        Session session = Util.getSession();
         Transaction tx = session.beginTransaction();
 
         Query query = session.createQuery("delete from User");
